@@ -1,0 +1,14 @@
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "description": "make rest api with typescript - express js",
+  "main": "index.js",
+  "author": "Abdul Hafiz Ramadan",
+  "license": "MIT",
+  "scripts": {
+    "build": "rm -rf ./build && tsc",
+    "ts": "rm -rf ./build && tsc -w",
+    "dev": "nodemon ./build/index.js",
+    "start": "node ./build/index.js"
+  }
+}
