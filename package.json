@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rm -rf ./build && tsc",
-    "ts": "tsc -w",
+    "ts": "rm -rf ./build && tsc -w",
     "dev": "nodemon ./build/index.js",
     "start": "node ./build/index.js"
   },
