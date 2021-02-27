@@ -1,4 +1,5 @@
 import express, { Application, Request, Response } from 'express';
+import morgan from 'morgan';
 
 const PORT = 4000;
 
@@ -12,6 +13,7 @@ class App {
     }
 
     protected middleware = () : void => {
+        this.app.use(morgan("dev"));
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended: true}));
     }
