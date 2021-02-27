@@ -1,3 +1,3 @@
-import UserRoutes from './UserRoutes';
+import UserRoutes from './UserRoute';
 
-export {UserRoutes};
+export { UserRoutes };
