@@ -7,12 +7,20 @@ const express_1 = __importDefault(require("express"));
 const PORT = 4000;
 class App {
     constructor() {
+        this.middleware = () => {
+            this.app.use(express_1.default.json());
+            this.app.use(express_1.default.urlencoded({ extended: true }));
+        };
         this.routes = () => {
             this.app.get("/", (request, response) => {
                 response.send("Dashboard");
             });
+            this.app.post("/users", (request, response) => {
+                response.send(request.body);
+            });
         };
         this.app = express_1.default();
+        this.middleware();
         this.routes();
     }
 }

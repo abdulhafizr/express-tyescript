@@ -7,12 +7,22 @@ class App {
 
     constructor() {
         this.app = express();
+        this.middleware();
         this.routes();
+    }
+
+    protected middleware = () : void => {
+        this.app.use(express.json());
+        this.app.use(express.urlencoded({extended: true}));
     }
 
     protected routes = () : void => {
         this.app.get("/", (request: Request, response: Response) => {
             response.send("Dashboard");
+        })
+
+        this.app.post("/users", (request: Request, response: Response) => {
+            response.send(request.body);
         })
     } 
 }
