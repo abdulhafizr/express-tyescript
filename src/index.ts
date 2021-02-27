@@ -1,4 +1,5 @@
 import express, { Application, Request, Response } from 'express';
+import mongoose from 'mongoose';
 import morgan from 'morgan';
 import compression from 'compression';
 import helmet from 'helmet';
@@ -7,7 +8,10 @@ import cors from 'cors';
 // All Routes
 import { UserRoutes } from './routes';
 
-const PORT = 4000;
+// Utilities
+const DATABASEURL: string = 'mongodb://ahr-admin:221122@cluster0-shard-00-00.k9mrv.mongodb.net:27017,cluster0-shard-00-01.k9mrv.mongodb.net:27017,cluster0-shard-00-02.k9mrv.mongodb.net:27017/ahr?ssl=true&replicaSet=atlas-11vykd-shard-0&authSource=admin&retryWrites=true&w=majority';
+const PORT: number = 4000;
+
 
 class App {
     public app: Application;
@@ -15,6 +19,7 @@ class App {
     constructor() {
         this.app = express();
         this.middleware();
+        this.databaseConnection();
         this.routes();
     }
 
@@ -25,6 +30,18 @@ class App {
         this.app.use(compression());
         this.app.use(helmet());
         this.app.use(cors());
+    }
+
+    protected databaseConnection = () : void => {
+        mongoose.connect(DATABASEURL, {useNewUrlParser: true, useUnifiedTopology: true});
+
+        const database = mongoose.connection;
+        database.on('error', () => {
+            console.log("Connection to database error");
+        })
+        database.once('open', () => {
+            console.log("Connection to database success");
+        })
     }
 
     protected routes = () : void => {
