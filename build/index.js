@@ -8,6 +8,8 @@ const morgan_1 = __importDefault(require("morgan"));
 const compression_1 = __importDefault(require("compression"));
 const helmet_1 = __importDefault(require("helmet"));
 const cors_1 = __importDefault(require("cors"));
+// All Routes
+const routes_1 = require("./routes");
 const PORT = 4000;
 class App {
     constructor() {
@@ -23,9 +25,7 @@ class App {
             this.app.get("/", (request, response) => {
                 response.send("Dashboard");
             });
-            this.app.post("/users", (request, response) => {
-                response.send(request.body);
-            });
+            this.app.use("/users", routes_1.UserRoutes);
         };
         this.app = express_1.default();
         this.middleware();

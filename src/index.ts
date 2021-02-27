@@ -4,6 +4,9 @@ import compression from 'compression';
 import helmet from 'helmet';
 import cors from 'cors';
 
+// All Routes
+import { UserRoutes } from './routes';
+
 const PORT = 4000;
 
 class App {
@@ -29,9 +32,7 @@ class App {
             response.send("Dashboard");
         })
 
-        this.app.post("/users", (request: Request, response: Response) => {
-            response.send(request.body);
-        })
+        this.app.use("/users", UserRoutes);
     } 
 }
 
