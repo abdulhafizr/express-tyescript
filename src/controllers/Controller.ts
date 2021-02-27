@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 
 interface Controller {
-    index(request: Request, response: Response) : Response;
-    show(request: Request, response: Response) : Response;
-    create(request: Request, response: Response) : Response;
-    update(request: Request, response: Response) : Response;
-    delete(request: Request, response: Response) : Response;
+    index(request: Request, response: Response) : void;
+    show(request: Request, response: Response) : void;
+    create(request: Request, response: Response) : void;
+    update(request: Request, response: Response) : void;
+    delete(request: Request, response: Response) : void;
 }
 
 export default Controller;
