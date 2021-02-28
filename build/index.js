@@ -38,7 +38,7 @@ class App {
             this.app.get("/", (request, response) => {
                 response.send("Dashboard");
             });
-            this.app.use("/users", routes_1.UserRoutes);
+            this.app.use("/api/v1/user", routes_1.UserRoutes);
         };
         this.app = express_1.default();
         this.middleware();

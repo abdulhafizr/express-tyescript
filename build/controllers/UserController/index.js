@@ -6,7 +6,7 @@ class UserController {
         this.index = (request, response) => {
             models_1.User.find({}, (error, data) => {
                 if (error)
-                    return response.status(500).json({ message: "Internal server error", error });
+                    return response.status(500).json({ message: "Internal Server Error", error });
                 response.status(200).json({
                     message: "Get all user success",
                     method: request.method,
@@ -15,7 +15,16 @@ class UserController {
             });
         };
         this.show = (request, response) => {
-            response.send("Show a User");
+            const { _id } = request.params;
+            models_1.User.findOne({ _id }, (error, data) => {
+                if (error)
+                    return response.status(500).json({ message: 'Internal Server Error', error });
+                response.status(200).json({
+                    message: "Get a user success",
+                    method: request.method,
+                    data,
+                });
+            });
         };
         this.create = (request, response) => {
             const { name, email, photo } = request.body;
@@ -30,10 +39,29 @@ class UserController {
             });
         };
         this.update = (request, response) => {
-            response.send("Update a User");
+            const { _id } = request.params;
+            const { name, email, photo } = request.body;
+            models_1.User.updateOne({ _id }, { name, email, photo }, {}, (error, data) => {
+                if (error)
+                    return response.status(500).json({ message: "Internal server error", error });
+                response.status(201).json({
+                    message: "Success to update user",
+                    method: request.method,
+                    data: { name, email, photo },
+                });
+            });
         };
         this.delete = (request, response) => {
-            response.send("Delete a User");
+            const { _id } = request.params;
+            models_1.User.deleteOne({ _id }, {}, (error) => {
+                if (error)
+                    return response.status(500).json({ message: "Internal server error", error });
+                response.status(201).json({
+                    message: "Success to delete user",
+                    method: request.method,
+                    data: { _id },
+                });
+            });
         };
     }
 }

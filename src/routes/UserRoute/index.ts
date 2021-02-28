@@ -13,7 +13,10 @@ class UserRoutes implements Routes {
 
     public routes = () : void => {
         this.router.get("/", UserController.index);
+        this.router.get("/:_id", UserController.show);
         this.router.post("/", UserController.create);
+        this.router.patch("/:_id", UserController.update);
+        this.router.delete("/:_id", UserController.delete);
     }
 }
 

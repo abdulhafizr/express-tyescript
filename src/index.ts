@@ -49,7 +49,7 @@ class App {
             response.send("Dashboard");
         })
 
-        this.app.use("/users", UserRoutes);
+        this.app.use("/api/v1/user", UserRoutes);
     } 
 }
 
